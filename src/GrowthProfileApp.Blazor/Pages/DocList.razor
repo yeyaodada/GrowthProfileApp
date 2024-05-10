@@ -1,0 +1,66 @@
+﻿@page "/Document/AuditList"
+
+@inject BasicInfoDocumentService Service
+@inject NavigationManager NavMgr
+@inherits GrowthProfileAppComponentBase
+
+@using Documents
+<Card>
+    <CardHeader>
+        <h2>档案审核</h2>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="BasicInfoDocumentDto"
+                  Data="InfoList"
+                  ReadData="OnDataGridReadAsync"
+                  TotalItems="TotalCount"
+                  ShowPager="true"
+                  PageSize="PageSize">
+            <DataGridColumns>
+                <DataGridColumn Width="150px"
+                                TItem="BasicInfoDocumentDto"
+                                Field="@nameof(BasicInfoDocument.Id)"
+                                Sortable="false"
+                                Caption="操作">
+                    <DisplayTemplate>
+                        <Dropdown>
+                            <DropdownToggle Color="Color.Primary">
+                                操作
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem Clicked="() => { NavigateToAudit(context.UserID.ToString()); }">
+                                    审核
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="BasicInfoDocumentDto"
+                                Field="@nameof(BasicInfoDocumentDto.Name)"
+                                Caption="姓名"></DataGridColumn>
+                <DataGridColumn TItem="BasicInfoDocumentDto"
+                                Field="@nameof(BasicInfoDocumentDto.Nation)"
+                                Caption="民族"></DataGridColumn>
+                <DataGridColumn TItem="BasicInfoDocumentDto"
+                                Field="@nameof(BasicInfoDocumentDto.Birthday)"
+                                Caption="生日">
+                    <DisplayTemplate>
+                        @context.Birthday.ToShortDateString()
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="BasicInfoDocumentDto"
+                                Field="@nameof(BasicInfoDocumentDto.PoliticalStatus)"
+                                Caption="政治面貌"></DataGridColumn>
+                <DataGridColumn TItem="BasicInfoDocumentDto"
+                                Field="@nameof(BasicInfoDocumentDto.Faculty)"
+                                Caption="院系"></DataGridColumn>
+                <DataGridColumn TItem="BasicInfoDocumentDto"
+                                Field="@nameof(BasicInfoDocumentDto.Profession)"
+                                Caption="专业"></DataGridColumn>
+                <DataGridColumn TItem="BasicInfoDocumentDto"
+                                Field="@nameof(BasicInfoDocumentDto.Class)"
+                                Caption="班级"></DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>

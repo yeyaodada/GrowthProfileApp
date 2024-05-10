@@ -1,0 +1,66 @@
+﻿@page "/Document/EditInfo/"
+@using GrowthProfileApp.Manager
+@inherits GrowthProfileAppComponentBase
+@inject InfoAppService Service
+
+<Div>
+    <Form>
+        <Div Class="form-group">
+            <Label For="Name">姓名</Label>
+            <InputTextArea @bind-Value="@_obj.Name" class="form-control" id="Name"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="Nation">民族</Label>
+            <InputTextArea @bind-Value="@_obj.Nation" class="form-control" id="Nation"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="Birthday">生日</Label>
+            <DateEdit TValue="DateTime?" @bind-Date="@_birthday" class="form-control" id="Birthday"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="PoliticalStatus">政治面貌</Label>
+            <InputTextArea @bind-Value="@_obj.PoliticalStatus" class="form-control" id="PoliticalStatus"/>
+        </Div>
+        <hr/>
+        <Div Class="form-group">
+            <Label For="Faculty">院系</Label>
+            <InputTextArea @bind-Value="@_obj.Faculty" class="form-control" id="Faculty"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="Profession">专业</Label>
+            <InputTextArea @bind-Value="@_obj.Profession" class="form-control" id="Profession"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="Class">班级</Label>
+            <InputTextArea @bind-Value="@_obj.Class" class="form-control" id="Class"/>
+        </Div>
+        <hr/>
+        <Div Class="form-group">
+            <Label For="Address">家庭住址</Label>
+            <InputTextArea @bind-Value="@_obj.Address" class="form-control" id="Address"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="FamilyStatus">家庭情况</Label>
+            <InputTextArea @bind-Value="@_obj.FamilyStatus" class="form-control" id="FamilyStatus"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="FamilyDescription">描述自己的家庭</Label>
+            <InputTextArea @bind-Value="@_obj.FamilyDescription" class="form-control" id="FamilyDescription"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="GrowthEnvironmentDescription">描述自己生活成长的环境和学习的经历</Label>
+            <InputTextArea @bind-Value="@_obj.GrowthEnvironmentDescription" class="form-control" id="GrowthEnvironmentDescription"/>
+        </Div>
+        <Div Class="form-group">
+            <Label For="SelfIntroduction">说说自己</Label>
+            <InputTextArea @bind-Value="@_obj.SelfIntroduction" class="form-control" id="SelfIntroduction" placeholder="特长，兴趣爱好，将来的规划..."/>
+        </Div>
+        <Div style="margin: 50px">
+            <Button class="btn btn-success" PreventDefaultOnSubmit="true" Clicked="Save">保存</Button>
+        </Div>
+        <Alert Color="Color.Success" @bind-Visible="@_savedAlertVisible">
+            <AlertMessage>保存成功</AlertMessage>
+            <CloseButton />
+        </Alert>
+    </Form>
+</Div>

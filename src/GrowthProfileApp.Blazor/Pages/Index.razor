@@ -1,0 +1,61 @@
+﻿@page "/"
+@using GrowthProfileApp.Manager
+@inherits GrowthProfileAppComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject DocumentAppService DocService
+@inject InfoAppService InfoService
+
+<div class="container">
+    <div class="p-5 text-center">
+        @if (CurrentUser.IsAuthenticated)
+        {
+            @if (CurrentUser.IsInRole("Teacher"))
+            {
+                <Badge Color="Color.Success" class="mb-4">
+                    <h5 class="m-1"> <i class="fas fa-rocket"></i> 欢迎回来，<strong>@CurrentUser.Name</strong>老师，请在右侧选择你要进行的操作</h5>
+                </Badge>
+            } else
+            {
+                <Badge Color="Color.Success" class="mb-4">
+                    <h5 class="m-1"> <i class="fas fa-rocket"></i> 欢迎回来，<strong>@CurrentUser.Name</strong>同学，请在右侧选择你要进行的操作</h5>
+                </Badge>
+            }
+        }
+        <h1>欢迎来到 学生成长档案管理中心</h1>
+
+        @if (!CurrentUser.IsAuthenticated)
+        {
+            <p class="lead px-lg-5 mx-lg-5">你可以在下方登录</p>
+            <a class="btn btn-primary" href="Account/Login"><i class="fa fa-sign-in"></i>登录</a>
+        }
+    </div>
+
+    @if (CurrentUser.IsAuthenticated)
+    {
+        <Div style="display: flex">
+            <Div Style="width: 20%; height: 20%; margin-right: 20px">
+                <Card>
+                    <RadarChart TItem="double" @ref="_mRadarChart" />
+                </Card>
+            </Div>
+            <Div style="width: 75%; height: 270px">
+                @if (!Notice.IsNullOrWhiteSpace())
+                {
+                    <Card Style="color: red">
+                        <CardBody>
+                            @Notice
+                        </CardBody>
+                    </Card>
+                }
+                else
+                {
+                    <Card>
+                        <CardBody>
+                            已完成全部档案
+                        </CardBody>
+                    </Card>
+                }
+            </Div>
+        </Div>
+    }
+</div>

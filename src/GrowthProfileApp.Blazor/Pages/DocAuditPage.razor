@@ -1,0 +1,140 @@
+﻿@page "/Document/Audit/{UserId}"
+@using GrowthProfileApp.Manager
+
+@inject InfoAppService InfoService
+@inject DocumentAppService DocService
+
+<h3>审核档案</h3>
+
+
+<Div>
+    <Div Style="padding: 20px;">
+        <Dropdown>
+            <DropdownToggle Color="Color.Primary">
+                选择学年
+            </DropdownToggle>
+            <DropdownMenu>
+                <DropdownItem Clicked="() => SetDisplayingDoc(0)">
+                    第一学年
+                </DropdownItem>
+                <DropdownItem Clicked="() => SetDisplayingDoc(1)">
+                    第二学年
+                </DropdownItem>
+                <DropdownItem Clicked="() => SetDisplayingDoc(2)">
+                    第三学年
+                </DropdownItem>
+                <DropdownItem Clicked="() => SetDisplayingDoc(3)">
+                    第四学年
+                </DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
+    </Div>
+    <Form>
+        <Card>
+            <CardHeader>
+                <h4>@_basicInfo.Name 的成长档案</h4>
+            </CardHeader>
+            <CardBody>
+                @if (_obj != null)
+                {
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">1. 学习目标: </Label>
+                        <Label>@_obj.LearningGoal</Label>
+                        <Progress Value="25" />
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">2. 考试目标: </Label>
+                        <Label>@_obj.ExamGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">3. 政治目标: </Label>
+                        <Label>@_obj.PoliticalGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">4. 学生干部: </Label>
+                        <Label>@_obj.RoleGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">5. 获奖计划: </Label>
+                        <Label>@_obj.AwardGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">6. 社团: </Label>
+                        <Label>@_obj.ClubGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">7. 读书计划: </Label>
+                        <Label>@_obj.ReadingGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">8. 社会实践计划: </Label>
+                        <Label>@_obj.SocialCreditGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">9. 锻炼计划: </Label>
+                        <Label>@_obj.ExerciseGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">10. 自我展示计划: </Label>
+                        <Label>@_obj.ShowOffGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">11. 其他计划: </Label>
+                        <Label>@_obj.OtherGoal</Label>
+                    </Div>
+                    <Div Class="form-group">
+                        <Label style="font-weight: bold">12. 学期总结: </Label>
+                        <Label>@_obj.TermSummary</Label>
+                    </Div>
+                }
+                else
+                {
+                    <h4>档案不存在</h4>
+                }
+            </CardBody>
+        </Card>
+        @if (_obj != null)
+        {
+            <Div Class="form-group">
+                <Card>
+                    <CardHeader>
+                        <h4>导员审核</h4>
+                    </CardHeader>
+                    <CardBody>
+                        <Div class="form-group">
+                            <Label>导员意见</Label>
+                            <InputTextArea @bind-Value="@_obj.TeacherComment" class="form-control" id="TeacherComment"/>
+                        </Div>
+                        <Div Class="form-group">
+                            <Label style="font-weight: bold">维度A评分</Label>
+                            <NumericEdit TValue="int" @bind-Value="@_obj.ScoreA" Min="0" Max="100"></NumericEdit>
+                        </Div>
+                        <Div Class="form-group">
+                            <Label style="font-weight: bold">维度B评分</Label>
+                            <NumericEdit TValue="int" @bind-Value="@_obj.ScoreB" Min="0" Max="100"></NumericEdit>
+                        </Div>
+                        <Div Class="form-group">
+                            <Label style="font-weight: bold">维度C评分</Label>
+                            <NumericEdit TValue="int" @bind-Value="@_obj.ScoreC" Min="0" Max="100"></NumericEdit>
+                        </Div>
+                        <Div Class="form-group">
+                            <Label style="font-weight: bold">维度D评分</Label>
+                            <NumericEdit TValue="int" @bind-Value="@_obj.ScoreD" Min="0" Max="100"></NumericEdit>
+                        </Div>
+                        <Div Class="form-group">
+                            <Label style="font-weight: bold">维度E评分</Label>
+                            <NumericEdit TValue="int" @bind-Value="@_obj.ScoreE" Min="0" Max="100"></NumericEdit>
+                        </Div>
+                        <Div style="margin: 50px">
+                            <Button class="btn btn-success" PreventDefaultOnSubmit="true" Clicked="Save">保存</Button>
+                        </Div>
+                        <Alert Color="Color.Success" @bind-Visible="@_savedAlertVisible">
+                            <AlertMessage>保存成功</AlertMessage>
+                            <CloseButton/>
+                        </Alert>
+                    </CardBody>
+                </Card>
+            </Div>
+        }
+    </Form>
+</Div>

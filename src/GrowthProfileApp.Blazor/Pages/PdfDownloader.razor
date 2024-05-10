@@ -1,0 +1,30 @@
+﻿@page "/DownloadPdf/{tgtId}/{term:int}"
+@using GrowthProfileApp.Manager
+@using GrowthProfileApp.Resource
+
+@inject InfoAppService InfoService
+@inject DocumentAppService DocService
+@inject ResourceAppService ResService
+
+<Card>
+    <CardBody>
+        @if (shouldShow)
+        {
+            <center style="margin: 60px auto; display: block">
+                <span>
+                    <h3>你即将下载 @infoDto.Name 的个人档案</h3>
+                </span>
+                <Button class="btn btn-success" Clicked="OnDownloadClicked">下载</Button>
+            </center>
+        }
+        else
+        {
+            <h3>404 - 未找到相应数据！</h3>
+        }
+    </CardBody>
+</Card>
+
+
+@code {
+    
+}

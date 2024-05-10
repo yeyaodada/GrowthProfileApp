@@ -1,0 +1,195 @@
+﻿@page "/Document/Editor/{Term:int}"
+
+@using GrowthProfileApp.Manager
+@inherits GrowthProfileAppComponentBase
+
+@inject DocumentAppService Service
+@inject NavigationManager NavMgr
+
+<h3>个人档案编辑</h3>
+
+<Div Style="margin: 20px; padding: 10px">
+    <Div>
+        <Span Style="font-style: italic">
+            @switch (Term)
+            {
+                case 1:
+                    <Div>
+                        大学一年级：探索期 <br/>
+                        <br/>
+                        【阶段目标】适应大学生活，树立规划意识 <br/>
+                        【实施策略】 <br/>
+                        ——结合就业形势，树立新的奋斗目标。开设专业认知、自我认知、职业定位、职业测评四个模块指导。引导学生适应新的大学生活，了解专业，使学生顺利实现从中学生到大学生的角色转换，并进行人生观、价值观、成才观和择业观的教育，引导学生根据自身特点初步设计职业发展方向，树立正确的职业观和职业理想。 <br/>
+                        ——完成从中学生到大学生的角色转变，尽快适应大学生活。虚心请教师兄师姐，积极参加集体活动，建立新的人际关系圈。熟读学生手册，关注学籍管理规定，保证学习成绩。 <br/>
+                        ——开始自我和职业的探索，树立职业规划意识。通过职业测评等工具全面客观地探索自己，思考有哪些职业与自己所读的课程、专业相吻合，通过互联网、报刊杂志和访谈等渠道进一步了解这些职业。 <br/>
+                    </Div>
+                    break;
+                case 2:
+                    <Div>
+                        大学二年级：定向期 <br/>
+                        <br/>
+                        【阶段目标】确定主攻方向，培养综合素质 <br/>
+                        【实施策略】 <br/>
+                        ——虚心请教师长和校友，根据自己的发展意愿选定专业或主攻方向，有必要、有条件的话同时辅修其它课程和专业。 <br/>
+                        ——建立合理的知识结构，注重专业能力的培养，参加英语、计算机等工具性证书的考试。 <br/>
+                        ——开展职业资格认证、职业生涯设计、职业素养训练四大模块，利用寒暑假组织社会实践。（职业素养训练包括：领导力训练、团队精神训练、沟通技巧训练、交际礼仪训练四大部分） <br/>
+                        ——积极参加学生会或社团工作，培养自己的组织协调能力和团队合作精神，提升自己的综合素质。 <br/>
+                        ——尝试兼职、实习等，积累一定的职业经验。 <br/>
+                    </Div>
+                    break;
+                case 3:
+                    <Div>
+                        大学三年级：提升期 <br/>
+                        <br/>
+                        【阶段目标】提升职业技能，积累职业经验 <br/>
+                        【实施策略】 <br/>
+                        ——加强专业知识学习的同时，考取与职业目标相关的职业资格证书。 <br/>
+                        ——增强兼职、实习的职业针对性，积累对应聘有利的职业实践经验。 <br/>
+                        ——扩大校内外交际圈，加强与校友、职场人士的交往，提前参加校园招聘会，与用人单位招聘人员进行沟通。 <br/>
+                        ——学习求职技巧，学会制作简历、求职信，了解面试技巧和职场礼仪。 <br/>
+                        ——如果决定考研，要做好复习准备；如果希望出国，要注意留学资讯和动向，准备TOEFL、GRE考试。 <br/>
+                        ——在大三后期要查漏补缺，检查当下与毕业后目标的差距，及时采取纠偏措施，为大四目标的顺利完成打下坚实的基础。 <br/>
+                    </Div>
+                    break;
+                case 4:
+                    <Div>
+                        大学四年级：冲刺期 <br/>
+                        <br/>
+                        【阶段目标】充分掌握资讯，实现毕业目标 <br/>
+                        【实施策略】 <br/>
+                        ——留意学校就业办公室通知和其它重要的招聘渠道，不要遗漏关键的招聘信息。 <br/>
+                        ——登陆招聘单位网站或通过咨询、访谈等方式，了解招聘单位的相关信息，为面试做好准备。 <br/>
+                        ——选择实用性高的毕业设计(论文)题目，借机证明自己的应用研究能力。 <br/>
+                        ——学会就业心理调节，始终保持自信和主动。 <br/>
+                        ——了解劳动法规和政策，学会保障自己的劳动权益。 <br/>
+                    </Div>
+                    break;
+            }
+        </Span>
+    </Div>
+    <hr/>
+    <Form>
+        <Card>
+            <CardHeader>
+                <h6>成长档案</h6>
+            </CardHeader>
+            <CardBody>
+                <Div Class="form-group">
+                    <Label For="LearningGoal">1. 学习目标</Label>
+                    <InputTextArea @bind-Value="@_obj.LearningGoal" class="form-control" id="LearningGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10"/>
+                </Div>
+                <Div Class="form-group">
+                    <Label For="ExamGoal">2. 考试目标</Label>
+                    <InputTextArea @bind-Value="@_obj.ExamGoal" class="form-control" id="ExamGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="PoliticalGoal">3. 政治目标</Label>
+                    <InputTextArea @bind-Value="@_obj.PoliticalGoal" class="form-control" id="PoliticalGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="RoleGoal">4. 学生干部</Label>
+                    <InputTextArea @bind-Value="@_obj.RoleGoal" class="form-control" id="RoleGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="AwardGoal">5. 获奖计划</Label>
+                    <InputTextArea @bind-Value="@_obj.AwardGoal" class="form-control" id="AwardGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="ClubGoal">6. 社团</Label>
+                    <InputTextArea @bind-Value="@_obj.ClubGoal" class="form-control" id="ClubGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="ReadingGoal">7. 读书计划</Label>
+                    <InputTextArea @bind-Value="@_obj.ReadingGoal" class="form-control" id="ReadingGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="SocialCreditGoal">8. 社会实践计划</Label>
+                    <InputTextArea @bind-Value="@_obj.SocialCreditGoal" class="form-control" id="SocialCreditGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="ExerciseGoal">9. 锻炼计划</Label>
+                    <InputTextArea @bind-Value="@_obj.ExerciseGoal" class="form-control" id="ExerciseGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="ShowOffGoal">10. 自我展示计划</Label>
+                    <InputTextArea @bind-Value="@_obj.ShowOffGoal" class="form-control" id="ShowOffGoal" placeholder="做一件让大家认识你的事"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="OtherGoal">11. 其他计划</Label>
+                    <InputTextArea @bind-Value="@_obj.OtherGoal" class="form-control" id="OtherGoal"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+                <Div Class="form-group">
+                    <Label For="TermSummary">12. 学期总结</Label>
+                    <InputTextArea @bind-Value="@_obj.TermSummary" class="form-control" id="TermSummary"/>
+                    <Label For="LearningGoal">完成进度</Label>
+                    <Rating Color="Color.Primary" MaxValue="10" />
+                </Div>
+
+                <Div style="margin: 50px">
+                    <Button class="btn btn-success" PreventDefaultOnSubmit="true" Clicked="Save">保存</Button>
+                    <Button class="btn btn-success" PreventDefaultOnSubmit="true" Clicked="NavigateToDownload">下载</Button>
+                </Div>
+                <Alert Color="Color.Success" @bind-Visible="@_savedAlertVisible">
+                    <AlertMessage>保存成功</AlertMessage>
+                    <CloseButton/>
+                </Alert>
+            </CardBody>
+
+        </Card>
+
+        <Card>
+            <CardHeader>
+                <h6>辅导员评价</h6>
+            </CardHeader>
+            <CardBody>
+                <Div Class="form-group">
+                    <Label style="font-weight: bold">辅导员指导意见: </Label>
+                    <Label>@_obj.TeacherComment</Label>
+                </Div>
+                <Div Class="form-group">
+                    <Label style="font-weight: bold">维度A评分: </Label>
+                    <Label>@_obj.ScoreA</Label>
+                </Div>
+                <Div Class="form-group">
+                    <Label style="font-weight: bold">维度B评分: </Label>
+                    <Label>@_obj.ScoreB</Label>
+                </Div>
+                <Div Class="form-group">
+                    <Label style="font-weight: bold">维度C评分: </Label>
+                    <Label>@_obj.ScoreC</Label>
+                </Div>
+                <Div Class="form-group">
+                    <Label style="font-weight: bold">维度D评分: </Label>
+                    <Label>@_obj.ScoreD</Label>
+                </Div>
+                <Div Class="form-group">
+                    <Label style="font-weight: bold">维度E评分: </Label>
+                    <Label>@_obj.ScoreE</Label>
+                </Div>
+            </CardBody>
+        </Card>
+    </Form>
+
+</Div>
